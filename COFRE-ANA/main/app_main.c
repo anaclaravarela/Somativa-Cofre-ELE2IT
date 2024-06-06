@@ -136,29 +136,29 @@ void app_main(void)
        // vTaskDelay(300/portTICK_PERIOD_MS); //delay de 300 milisegundos
          
         lcd595_write (1,1, "Escreva a senha"); //escreve no display
-        lcd595_write(2,1,"[ ] [ ] [ ] [ ]");
-        vTaskDelay (10/portTICK_PERIOD_MS);
+        lcd595_write(2,1,"[ ] [ ] [ ] [ ]"); //local para escrever a senha
+        vTaskDelay (10/portTICK_PERIOD_MS); // delay de 10 milisegundos 
 
          
-       if (controle==1) 
+       if (controle==1) // se a tecla 1 for pressionada ele faz a função de colocar um asterisco
        {
         lcd595_write(2,1,"[*] [ ] [ ] [ ]"); // escreve no display
         vTaskDelay (10/portTICK_PERIOD_MS); // delay de 150 milisegundos
        }
 
-        if (controle==2) 
+        if (controle==2) // se a tecla 2 for pressionada faz a função de colocar dois asteriscos 
        {
         lcd595_write(2,1,"[*] [*] [ ] [ ]"); // escreve no display
         vTaskDelay (10/portTICK_PERIOD_MS); // delay de 150 milisegundos
        }
        
-        if (controle==3) 
+        if (controle==3) //se a tecla 3 for pressionada faz a função de colocar três asteriscos
        {
         lcd595_write(2,1,"[*] [*] [*] [ ]"); // escreve no display
         vTaskDelay (10/portTICK_PERIOD_MS); // delay de 150 milisegundos
        }
 
-       if (controle==4) 
+       if (controle==4)  // se a tecla 4 for pressionada faz a função de colocar quatro asteriscos 
        {
         lcd595_write(2,1,"[*] [*] [*] [*]"); // escreve no display
         vTaskDelay (10/portTICK_PERIOD_MS); // delay de 150 milisegundos
@@ -170,35 +170,37 @@ void app_main(void)
             if ( num1 == 1234 ) // se o número escrito for 1234 a função será feita
             {
             
-                    lcd595_write(1,1, " Senha Correta ");
-                    vTaskDelay (1000/portTICK_PERIOD_MS);
+                    lcd595_write(1,1, " Senha Correta ");// escreve no display lcd
+                    vTaskDelay (1000/portTICK_PERIOD_MS);// delay de 10 segundos
 
-                    lcd595_write(1,1, " Cofre Abrindo ");
+                    lcd595_write(1,1, " Cofre Abrindo "); //escreve no display
 
-                    rotacionar_DRV(1, 100, saidas);     //SENTIDO- 1(abrir tampa); 0(fecha tampa)   ÂNGULO- Valor      SAÍDAS-Variável saídas 
-                    vTaskDelay (1000/portTICK_PERIOD_MS);
+                    rotacionar_DRV(1, 100, saidas); // sentido horário (abre tampa)-100 graus  
+                    //  SENTIDO- 1(abrir tampa); 0(fecha tampa)   ÂNGULO- Valor      SAÍDAS-Variável saídas 
+                    vTaskDelay (1000/portTICK_PERIOD_MS); //delay de 10 segundos 
                     
-                    lcd595_write(1,1, " Cofre Fechando ");
+                    lcd595_write(1,1, " Cofre Fechando "); //escreve no dispay
 
-                    rotacionar_DRV (0, 90, saidas); // sentido anti-horário (fecha tampa) 
-                    vTaskDelay (2000/portTICK_PERIOD_MS);
+                    rotacionar_DRV (0, 90, saidas); // sentido anti-horário (fecha tampa)- 90 graus
+                    vTaskDelay (2000/portTICK_PERIOD_MS);// tempo de delay
               
-                lcd595_clear();
-                num1 = 0;
-                resultado = 0;
-                controle = 0;
+                lcd595_clear();//limpa o dislay lcd
+                num1 = 0;// limpa a váriavel num1
+                resultado = 0; // limpa a variável resultado
+                controle = 0;// limpa a variável controle
 
 
             
             }
             else if (num1!=  1234 ) //se o número digitado for diferente de 1234 afunção será feita
             { 
-                    lcd595_write(1,1, "Senha Incorreta");
-                    vTaskDelay(1000/portTICK_PERIOD_MS);
-                lcd595_clear();
-                num1 = 0;
-                resultado = 0;
-                controle = 0;
+                    lcd595_write(1,1, "Senha Incorreta"); //escreve no display 
+                    vTaskDelay(1000/portTICK_PERIOD_MS); //tempo de delay
+
+                lcd595_clear();//limpa o display
+                num1 = 0; //limpa a variável
+                resultado = 0; //limpa a variável
+                controle = 0; //limpa a variável
             }
             
 
@@ -210,8 +212,9 @@ void app_main(void)
     }
     
     // caso erro no programa, desliga o módulo ADC
-    hcf_adc_limpar();
+    hcf_adc_limpar(); // limpa o adc 
 
     /////////////////////////////////////////////////////////////////////////////////////   Fim do ramo principal
     
 }
+
