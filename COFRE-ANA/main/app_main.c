@@ -35,7 +35,9 @@ int senha;
 int resultado=0;
 int num1=0;
 int controle = 0;
+int tentativa = 0;
 char seguranca;
+int i;
 
 
 bool digitou4numeros = false;
@@ -80,9 +82,10 @@ static uint8_t entradas, saidas = 0; //variáveis de controle de entradas e saí
     }
 
     void abrir_cofre () 
-{
-     lcd595_write (1, 0, "Abrindo Cofre"); //escreve no display 
-     for (int i = 0; i < 3500 ; i = valor) // se o valor for uma int=0, o valor do adc será de até 3500
+{   lcd595_clear(); //limpa o que foi escrito no display
+
+     lcd595_write (1, 1, " Abrindo Cofre  "); //escreve no display 
+     for (int i = 0; i < 1800 ; i = valor) // se o valor for uma int=0, o valor do adc será de até 3500
      {
         hcf_adc_ler (&valor); //le o valor do adc
         rotacionar_DRV (1,10, saidas); // rotaciona o motor de passo de 10 em 10 graus até o valor do adc ser atingido, abrindo o cofre (sentido horário)
@@ -93,10 +96,11 @@ static uint8_t entradas, saidas = 0; //variáveis de controle de entradas e saí
 }
 
 void fechar_cofre ()
-{
-     lcd595_write (1, 0, "Fechando Cofre"); //escreve no display
+{   lcd595_clear(); //limpa tudo que foi escrito anteriormente no display
+
+     lcd595_write (1, 1, " Fechando Cofre "); //escreve no display
      hcf_adc_ler (&valor); // le o valor do adc
-     for (int i = valor; i > 300 ; i = valor) //o valor davváriavel int não pode ficar menor do que 300(valor do adc)
+     for (int i = valor; i > 400 ; i = valor) //o valor davváriavel int não pode ficar menor do que 300(valor do adc)
      {
         hcf_adc_ler (&valor); //le o valor do adc
         rotacionar_DRV (0,10, saidas); //rotaciona o motor de passo aos poucos, de 10 em 10 graus fechando o cofre (sentido anti-horário)
@@ -107,37 +111,39 @@ void fechar_cofre ()
 }
 void escrever_segundos()
 {
-    lcd595_write (1,2, "Fechando em 10 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 10 seg."); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
 
-    lcd595_write (1,2, "Fechando em 9 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 9 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
 
-    lcd595_write (1,2, "Fechando em 8 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 8 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
 
-    lcd595_write (1,2, "Fechando em 7 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 7 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
 
-    lcd595_write (1,2, "Fechando em 6 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 6 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
 
-    lcd595_write (1,2, "Fechando em 5 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 5 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
 
-    lcd595_write (1,2, "Fechando em 4 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 4 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
     
-    lcd595_write (1,2, "Fechando em 3 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 3 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
 
-    lcd595_write (1,2, "Fechando em 2 segundos"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 2 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
     
-    lcd595_write (1,2, "Fechando em 1 segundo"); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
-         vTaskDelay(100/portTICK_PERIOD_MS); // delay de 1 segundo
+    lcd595_write (1,2, "Fechando em 1 seg. "); // escreve no display quantos segundos vai demorar para a tempa fechar (mudando a cada 1 segundo)
+         vTaskDelay(1000/portTICK_PERIOD_MS); // delay de 1 segundo
 
 }
+
+
 void app_main(void)
 {
     /////////////////////////////////////////////////////////////////////////////////////   Programa principal
@@ -155,8 +161,8 @@ void app_main(void)
 
     // inicializar o display LCD 
     lcd595_init();
-    lcd595_write(1,1,"    Jornada 1   ");
-    lcd595_write(2,1," Programa Basico");
+    lcd595_write(1,1,"    Cofre  ");
+    lcd595_write(2,1,"  Ana Clara ");
     
     // Inicializar o componente de leitura de entrada analógica
     esp_err_t init_result = hcf_adc_iniciar();
@@ -193,38 +199,34 @@ void app_main(void)
             }
             lcd595_clear(); //limpa o display lcd
             
-        //lcd595_write(1,3, "ROTACIONAR"); //escreve no display a palavara rotacionar e o vslor do adc
-        //sprintf( &mostra[0], "%"PRIu32"   ", ler_adc);// le o valor do adc 
-        //lcd595_write(2,5,&mostra[0]); // mostra o valor do adc no display
-        //vTaskDelay(300/portTICK_PERIOD_MS); //delay de 300 milisegundos
          
         lcd595_write (1,1, "Escreva a senha"); //escreve no display
         lcd595_write(2,1,"[ ] [ ] [ ] [ ]"); //local para escrever a senha
-        vTaskDelay (10/portTICK_PERIOD_MS); // delay de 10 milisegundos 
+        vTaskDelay (100/portTICK_PERIOD_MS); // delay de 100 milisegundos 
 
          
        if (controle==1) // se uma primeira tecla for pressionada ele faz a função de colocar um asterisco
        {
-        lcd595_write(2,1,"[*] [ ] [ ] [ ]"); // escreve no display
-        vTaskDelay (10/portTICK_PERIOD_MS); // delay de 150 milisegundos
+        lcd595_write(2,1,"[X] [ ] [ ] [ ]"); // escreve no display
+        vTaskDelay (100/portTICK_PERIOD_MS); // delay de 100 milisegundos
        }
 
         if (controle==2) // se uma segunda tecla for pressionada faz a função de colocar dois asteriscos 
        {
-        lcd595_write(2,1,"[*] [*] [ ] [ ]"); // escreve no display
-        vTaskDelay (10/portTICK_PERIOD_MS); // delay de 150 milisegundos
+        lcd595_write(2,1,"[X] [X] [ ] [ ]"); // escreve no display
+        vTaskDelay (100/portTICK_PERIOD_MS); // delay de 100 milisegundos
        }
        
         if (controle==3) //se uma terceira tecla for pressionada faz a função de colocar três asteriscos
        {
-        lcd595_write(2,1,"[*] [*] [*] [ ]"); // escreve no display
-        vTaskDelay (10/portTICK_PERIOD_MS); // delay de 150 milisegundos
+        lcd595_write(2,1,"[X] [X] [X] [ ]"); // escreve no display
+        vTaskDelay (100/portTICK_PERIOD_MS); // delay de 100 milisegundos
        }
 
        if (controle==4)  // se uma quarta tecla (idependente do valor) for pressionada faz a função de colocar quatro asteriscos 
        {
-        lcd595_write(2,1,"[*] [*] [*] [*]"); // escreve no display
-        vTaskDelay (10/portTICK_PERIOD_MS); // delay de 150 milisegundos
+        lcd595_write(2,1,"[X] [X] [X] [X]"); // escreve no display
+        vTaskDelay (100/portTICK_PERIOD_MS); // delay de 100 milisegundos
        }
 
 
@@ -239,26 +241,19 @@ void app_main(void)
                     abrir_cofre(); //faz a função void de abrir o cofre 
                     vTaskDelay (1000/portTICK_PERIOD_MS); //delay de 10 segundos 
 
-                    escrever_segundos();                    
+                    escrever_segundos();  //executa a função de escrever os segundos em ordem decrescente                 
                    
 
                     fechar_cofre(); // função de fechar o cofre 
-                    vTaskDelay (500/portTICK_PERIOD_MS);// tempo de delay (5 segundos)
+                    vTaskDelay (500/portTICK_PERIOD_MS);// tempo de delay (500 milisegundos)
 
-                //lcd595_write(1,1, " Cofre Abrindo "); //escreve no display
-
-                //rotacionar_DRV(1, 100, saidas); // sentido horário (abre tampa)-100 graus  
-                //SENTIDO- 1(abrir tampa); 0(fecha tampa)   ÂNGULO- Valor      SAÍDAS-Variável saídas 
-                    
-                //lcd595_write(1,1, " Cofre Fechando "); //escreve no dispay
-
-                // rotacionar_DRV (0, 90, saidas); // sentido anti-horário (fecha tampa)- 90 graus
-                //  vTaskDelay (2000/portTICK_PERIOD_MS);// tempo de delay
+                
               
                 lcd595_clear();//limpa o dislay lcd
                 num1 = 0;// limpa a váriavel num1
                 resultado = 0; // limpa a variável resultado
                 controle = 0;// limpa a variável controle
+                tentativa = 0;//limpa  a variável tentativa (evitando o bloqueio do sistema)
 
 
             
@@ -272,10 +267,53 @@ void app_main(void)
                 num1 = 0; //limpa a variável
                 resultado = 0; //limpa a variável
                 controle = 0; //limpa a variável
+                tentativa= tentativa + 1; //conta o número de tentativas
+
             }
-            
+            if (tentativa==1) //se houver a primeira tentativa, a função se inicia 
+            {
+                lcd595_write(1,1, "Restam 4 tent."); //escreve na primeira linha do display
+                lcd595_write(2,1, "Tente Novamente"); //escreve na segunda linha do displauy
+                vTaskDelay(5000/portTICK_PERIOD_MS); // delay de 5 segundos 
+            }
+
+            if (tentativa==2) // se houver uma segunda tentativa falha, a função é executada
+            {
+                lcd595_write(1,1, "Restam 3 tent.");//escreve na primeira linha do display
+                lcd595_write(2,1, "Tente Novamente");// escreve na segunda linha do display
+                vTaskDelay(5000/portTICK_PERIOD_MS); //delay de 5000 milisegundos
+            }
+
+            if (tentativa==3) //se existir a 3ª tentativa a função será executada
+            {
+                lcd595_write(1,1, "Restam 2 tent.");//escreve na primeira linha do display
+                lcd595_write(2,1, "Tente Novamente");// escreve na segunda linha do display
+                vTaskDelay(5000/portTICK_PERIOD_MS);//delay de 5000 milisegundos
+            }
+
+            if (tentativa==4)// se a quarta tentativa for escrita, a função será executada
+            {
+                lcd595_write(1,1, "Resta 1 tent.");// escreve na primeira linha do display lcd
+                lcd595_write(2,1, "Tente Novamente");// escreve na segunda linha do display lcd
+                vTaskDelay(5000/portTICK_PERIOD_MS);//delay de 5000 milisegundos
+            }
+            if (tentativa==5)// se houver a quinta tentativa o acesso será negado e o usuário deverá esperar 30 segundos
+            {
+                lcd595_write(1,1, " ACESSO NEGADO "); //escreve no display
+            for(int i=30; i>0; i--) // o valor é igual a 30 e deverá chegar no 0, de forma decrescente
+            {
+                sprintf (&mostra[0], "Liberando em %d seg.", i);//"escreve" em quantos segundos será liberado (mudando a cada 1 segundo)
+                
+                lcd595_write(2,1, &mostra[0]);//escreve no display o que a função sprintf escreveu
+                vTaskDelay(1000/portTICK_PERIOD_MS); //delay de 1 segundo, fazendo o número mudar de acordo com o tempo escrito
+
+            }
+            }
+
 
         }
+
+        
         
         //-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -  -  -  -  -  -  -  -  -  -  Escreva seu só até aqui!!! //
         //________________________________________________________________________________________________________________________________________________________//
@@ -286,4 +324,4 @@ void app_main(void)
     hcf_adc_limpar(); // limpa o adc 
 
     /////////////////////////////////////////////////////////////////////////////////////   Fim do ramo principal
-
+}
